@@ -1,26 +1,25 @@
 from kivymd.app import MDApp
+from kivy.lang import Builder
 from kivymd.uix.floatlayout import MDFloatLayout
+from kivymd.uix.card import MDCard
 import finder 
 
-# Funções da tela
-class Interface(MDFloatLayout):
-    # Chama função finder e muda as labels conforme preciso
-    def busca(self):
-        # Pega o conteúdo dos textfields e coloca em variáveis
-        comida = self.ids.mealType.text
-        local = self.ids.location.text
+class ResultadosCard(MDCard):
+    ...
 
-        # Chama a função finder e armazena o dicionário em uma variável
-        resposta = finder.findARestaurant(comida, local)
+class Inicial(MDFloatLayout):
+    ...
 
-        # Muda o texto das labels conforme o resultado
-        self.ids.name.text += resposta['name']
-        self.ids.adress.text += resposta['address']
-        self.ids.photo.text += resposta['photo']
 
-# Não sei pra que serve
-class Interface(MDApp):
-    pass
+class TelaLogin(MDFloatLayout):
+    def abrir_main(self):
+        # self.add_widget(Inicial())
+        ...
+
+# Construção principal do app
+class Myapp(MDApp):
+    def build(self):
+        return Builder.load_file('interface.kv')
     
 # Inicia o aplicativo
-Interface().run()
+Myapp().run()

@@ -1,9 +1,40 @@
-<Interface@MDFloatLayout>:
+ScreenManager:
+    id: screen_manager
+    Screen:
+        BoxLayout:
+            orientation: 'vertical'
+            name: "tela_login"
+            TelaLogin:
+       
+    Screen:
+        name: "pesquisa"
+        BoxLayout:
+            orientation: 'vertical'
+            name: "inicial"
+            Inicial:
+
+    Screen:
+        name: "resultados"
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint:{"left_x": 0.5, "center_y":0.9}
+            on_release:
+                screen_manager.current = "pesquisa"
+        MDLabel:
+            id: resultados
+            text: "resultados"
+            pos_hint:{"center_y":0.8}
+            halign: "center"
+
+
+
+
+<Inicial>
     MDLabel:
         text: "Seja bem-vindo ao FoodFinder!"
         halign: "center"
         pos_hint:{"center_y":0.9}
-        
+                
     MDTextField:
         id: mealType
         pos_hint:{"center_x": 0.5, "center_y":0.8}
@@ -17,32 +48,55 @@
         size_hint_x: 0.4
         mode: "rectangle"
         hint_text: "Insira o local"
-    
+            
     MDFillRoundFlatButton:
         text: "Clique para Buscar"
         size_hint_x: 0.4
         size_hint_y: 0.1
         pos_hint:{"center_x": 0.5, "center_y":0.55}
-        on_press: root.busca()
         color: "Blue"
         line_color: 0,0,1,1
-    
-    MDLabel:
-        id: name
-        text: "Nome: "
-        pos_hint:{"center_y":0.4}
-        halign: "center"
 
+<TelaLogin>
     MDLabel:
-        id: adress
-        text: "Endereço: "
-        pos_hint:{"center_y":0.3}
+        text: "Tela de Login"
         halign: "center"
-    
-    MDLabel:
-        id: photo
-        text: "Foto: "
-        pos_hint:{"center_y":0.2}
-        halign: "center"
+        pos_hint:{"center_x": 0.5, "center_y":0.9}
 
-Interface
+    MDTextField:
+        id: cpf
+        pos_hint:{"center_x": 0.5, "center_y":0.8}
+        size_hint_x: 0.4
+        mode: "rectangle"
+        hint_text: "CPF"
+
+    MDTextField:
+        id: senha
+        pos_hint:{"center_x": 0.5, "center_y":0.7}
+        size_hint_x: 0.4
+        mode: "rectangle"
+        hint_text: "Senha"
+        password: True
+
+    MDFillRoundFlatButton:
+        text: "Entrar"
+        halign: "center"
+        pos_hint:{"center_x": 0.5, "center_y":0.6}
+        on_release:
+            screen_manager.current = "Inicial"
+        size_hint_x: 0.4
+
+    MDFillRoundFlatButton:
+        text: "Cadastro"
+        halign: "center"
+        pos_hint:{"center_x": 0.5, "center_y":0.5}
+        size_hint_x: 0.4
+
+<ResultadosCard>
+    id: card
+    orientation: 'vertical'
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    size_hint: .7, .7
+    MDTextField:
+        size_hint: .4, .4
+        hint_text: 'Código enviado por email!'
