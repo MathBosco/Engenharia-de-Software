@@ -1,20 +1,27 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivymd.uix.floatlayout import MDFloatLayout
-from kivymd.uix.card import MDCard
+from kivy.uix.screenmanager import ScreenManager, Screen
 import finder 
 
-class ResultadosCard(MDCard):
+# Classes com as telas
+class Resultados(Screen):
     ...
 
-class Inicial(MDFloatLayout):
+class Inicial(Screen):
+    def busca(self):
+        comida = self.ids.mealType.text
+        local = self.ids.location.text
+
+        resposta = finder.findARestaurant(comida, local)
+
+class TelaLogin(Screen):
     ...
 
-
-class TelaLogin(MDFloatLayout):
-    def abrir_main(self):
-        # self.add_widget(Inicial())
-        ...
+# Screen manager
+sm = ScreenManager()
+sm.add_widget(TelaLogin(name='tela_login'))
+sm.add_widget(Inicial(name='inicial'))
+sm.add_widget(Resultados(name='resultados'))
 
 # Construção principal do app
 class Myapp(MDApp):

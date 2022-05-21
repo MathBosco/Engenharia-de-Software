@@ -1,35 +1,23 @@
 ScreenManager:
-    id: screen_manager
-    Screen:
-        BoxLayout:
-            orientation: 'vertical'
-            name: "tela_login"
-            TelaLogin:
-       
-    Screen:
-        name: "pesquisa"
-        BoxLayout:
-            orientation: 'vertical'
-            name: "inicial"
-            Inicial:
+    TelaLogin:
+    Inicial:
+    Resultados:
 
-    Screen:
-        name: "resultados"
-        MDIconButton:
-            icon: "arrow-left"
-            pos_hint:{"left_x": 0.5, "center_y":0.9}
-            on_release:
-                screen_manager.current = "pesquisa"
-        MDLabel:
-            id: resultados
-            text: "resultados"
-            pos_hint:{"center_y":0.8}
-            halign: "center"
-
-
-
+<Resultados>
+    name: "resultados"
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint:{"left_x": 0.5, "center_y":0.9}
+        on_press:
+            root.manager.current = "inicial"
+    MDLabel:
+        id: resultados
+        text: "resultados"
+        pos_hint:{"center_y":0.8}
+        halign: "center"
 
 <Inicial>
+    name: "inicial"
     MDLabel:
         text: "Seja bem-vindo ao FoodFinder!"
         halign: "center"
@@ -56,8 +44,12 @@ ScreenManager:
         pos_hint:{"center_x": 0.5, "center_y":0.55}
         color: "Blue"
         line_color: 0,0,1,1
+        on_press:
+            root.busca()
+            root.manager.current = 'resultados'
 
 <TelaLogin>
+    name: "tela_login"
     MDLabel:
         text: "Tela de Login"
         halign: "center"
@@ -82,8 +74,8 @@ ScreenManager:
         text: "Entrar"
         halign: "center"
         pos_hint:{"center_x": 0.5, "center_y":0.6}
-        on_release:
-            screen_manager.current = "Inicial"
+        on_press:
+            root.manager.current = "inicial"
         size_hint_x: 0.4
 
     MDFillRoundFlatButton:
@@ -91,12 +83,3 @@ ScreenManager:
         halign: "center"
         pos_hint:{"center_x": 0.5, "center_y":0.5}
         size_hint_x: 0.4
-
-<ResultadosCard>
-    id: card
-    orientation: 'vertical'
-    pos_hint: {'center_x': .5, 'center_y': .5}
-    size_hint: .7, .7
-    MDTextField:
-        size_hint: .4, .4
-        hint_text: 'Código enviado por email!'
